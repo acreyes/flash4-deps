@@ -1,19 +1,35 @@
 FROM ubuntu:20.04
 
+##########################
+#                        #
+#     INSTALL TZDATA     #
+#                        #
+##########################
+RUN apt-get update && \
+    apt-get install -yq tzdata && \
+    ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata
+
+
 #############################
 #                           #
 #     INSTALL COMPILERS     #
 #                           #
 #############################
-RUN apt-get update && apt-get -y install \
+RUN apt-get -y install \
     bash \
     build-essential \
     g++ \
     gcc \
+    gdb \
     gfortran \
     libz-dev \
+    openssh-client \
     python3 \
-    wget && \
+    subversion \
+    sudo \
+    wget \
+    && \
     rm -rf /var/lib/apt/lists/* && \
     ln -s /usr/bin/python3 /usr/local/bin/python
 
@@ -55,6 +71,13 @@ RUN wget -q -O - https://github.com/hypre-space/hypre/archive/v2.19.0.tar.gz | t
     make -j 4 && \
     make install && \
     rm -rf /tmp/hypre-2.19.0
+
+RUN useradd -m -G sudo -s /bin/bash \
+    -p $(perl -e 'print crypt($ARGV[0], "password")' 'flash') flash
+
+USER flash
+
+WORKDIR /home/flash
 
 ENTRYPOINT ["/bin/bash"]
 
