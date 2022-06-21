@@ -24,9 +24,9 @@ RUN apt-get -y install \
     gdb \
     gfortran \
     git \
-    libmpich-dev \
+    libopenmpi-dev \
     libz-dev \
-    mpich \
+    openmpi-bin \
     openssh-client \
     python3 \
     subversion \

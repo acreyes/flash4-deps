@@ -3,4 +3,4 @@
 all: image
 
 image:
-	docker build . -t flashcenter/flash4-deps-mpich:latest
+	docker build . -t flashcenter/flash4-deps-openmpi:latest
