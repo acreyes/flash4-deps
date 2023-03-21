@@ -16,6 +16,7 @@ docker container create -i -t -h gnu-mpich --name gnu-mpich -v /home/acreyes/pod
     
         ``` bash
         ln -s ConfigFiles/config.gnu-mpich ./config
+        ln -s ExeScripts/lahey-mpi2/exeScript exeScript
         ```
 
     * edit `config` to point to right things (this can be done on the repo for `flashTest`)
