@@ -23,3 +23,9 @@ docker container create -i -t -h gnu-mpich --name gnu-mpich -v /home/acreyes/pod
     * had to point to local `test.info` file. Couldn't copy from remote on `flash`
 
 * `flashTest.py` queries environment variable `$LOGNAME`, but container doesn't seem to set this. I exported it from CL
+
+* Run with:
+
+```bash
+./flashTest.py -v -f TestFiles/lahey-mpi2/quickTests
+```
