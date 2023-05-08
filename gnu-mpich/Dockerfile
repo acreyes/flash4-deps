@@ -27,6 +27,7 @@ RUN apt-get update && apt-get -y install \
     python3 \
     openssh-client \
     subversion \
+    m4 \
     wget && \
     rm -rf /var/lib/apt/lists/* && \
     ln -s /usr/bin/python2 /usr/local/bin/python
@@ -56,6 +57,18 @@ RUN wget -q -O - https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.12/hdf5-1
     make -j 4 && \
     make install && \
     rm -rf /tmp/hdf5-1.12.0
+
+# ###########################
+# #                         #
+# #     INSTALL PNETCDF     #
+# #                         #
+# ###########################
+RUN wget -q -0 https://parallel-netcdf.github.io/Release/pnetcdf-1.12.3.tar.gz | tar -C /tmp -xzf - && \
+    cd /tmp/pnetcdf-1.12.3 && \
+    ./configure --prefix=/usr/local \
+    make -j 4 && \
+    make install && \
+    rm -rf /tmp/pnetcdf-1.12.3
 
 
 # # #########################

@@ -13,12 +13,21 @@ services:
       dockerfile: gnu-mpich/Dockerfile.tester
       args:
         MYUSER: ${USER}
-        OUTPUT_DIR: ${OUTPUT_DIR}
     hostname: gnu-mpich
     environment:
       - LOGNAME=gnu-mpich
     volumes:
-      - ~/.ssh:/mnt/ssh:Z
+      - ${SSH_DIR}:/mnt/ssh:Z
       - ${FLASHDEPS_DIR}:/local:z
       - ${OUTPUT_DIR}:/outputdir:z
     command: /local/runTest.sh ${USER} gnu-mpich TestFiles/lahey-mpi2/quickTests
+
+  gnu-mpich-attach:
+    cpu_count: 4
+    image: testsuite/gnu-mpich/attach
+    env_file: .env
+    build:
+      dockerfile: gnu-mpich/Dockerfile.tester
+      args:
+        MYUSER: ${USER}
+    hostname: gnu-mpich
