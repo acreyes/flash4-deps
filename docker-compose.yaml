@@ -1,0 +1,23 @@
+services:
+  gnu-mpich:
+    image: testsuite/gnu-mpich
+    env_file: .env
+    build:
+      dockerfile: gnu-mpich/Dockerfile
+      args:
+        MYUSER: ${USER}
+    hostname: gnu-mpich
+  gnu-mpich-tester:
+    image: testsuite/gnu-mpich/tester
+    env_file: .env
+    build:
+      dockerfile: gnu-mpich/Dockerfile.tester
+      args:
+        MYUSER: ${USER}
+    hostname: gnu-mpich
+    environment:
+      - LOGNAME=gnu-mpich
+    volumes:
+      - ~/.ssh:/mnt/ssh:Z
+      - /home/acreyes/podman/flash4-deps/gnu-mpich:/local:z
+    # command: /local/runTest.sh ${USER} gnu-mpich
