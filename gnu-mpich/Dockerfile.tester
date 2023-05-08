@@ -3,7 +3,5 @@ FROM testsuite/gnu-mpich
 ARG MYUSER
 
 # volume /my/host/dir:/mnt:Z only like when we're root for w/e reason
-# RUN adduser --system ${MYUSER}
-# USER ${MYUSER}
 WORKDIR /home/${MYUSER}
 ENTRYPOINT ["/bin/bash"]

@@ -3,6 +3,8 @@
 # parse arguments
 MYUSER=$1
 VM=$2
+TESTFILE=$3
+
 FLASHTEST_DIR=/home/${MYUSER}/flashTest
 #configure ssh
 #   add flash to known hosts and point ssh to user's id_rsa
@@ -20,5 +22,5 @@ ln -s ${FLASHTEST_DIR}/TestInfoFiles/testComp.gnu-mpich.info ${FLASHTEST_DIR}/te
 mkdir -p /home/${MYUSER}/FLASH4
 
 # run flashTest!
-${FLASHTEST_DIR}/flashTest.py -v -u -s ${VM} -f TestFiles/lahey-mpi2/quickTests
+${FLASHTEST_DIR}/flashTest.py -v -u -s ${VM} -f ${TESTFILE}
 

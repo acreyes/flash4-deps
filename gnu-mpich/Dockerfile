@@ -1,7 +1,5 @@
 FROM ubuntu:20.04
 
-ARG MYUSER
-
 ##########################
 #                        #
 #     INSTALL TZDATA     #
@@ -72,25 +70,5 @@ RUN wget -q -O - https://github.com/hypre-space/hypre/archive/v2.19.0.tar.gz | t
     make install && \
     rm -rf /tmp/hypre-2.19.0
 
-# RUN addgroup --system tester
-# RUN adduser --system ${MYUSER}
-
-# USER ${MYUSER}
-
-
-# WORKDIR /home/${MYUSER}
-# RUN ssh -o "StrictHostKeyChecking no" flash.rochester.edu
-# RUN mkdir -p ~/.ssh
-# RUN ssh-keyscan -H flash.rochester.edu >> ~/.ssh/known_hosts
-# ENV SVN_SSH="ssh -i /mntssh/id_rsa"
-# RUN echo $(ls /mnt) > /home/acreyes/out.txt
-# # ENV SVN_CMD="svn co svn+ssh://${MYUSER}@flash.rochester.edu/home/svn/repos/flashTest/trunk /home/${MYUSER}/flashTest"
-# ENV SVN_CMD="ls /mnt"
-# RUN ${SVN_CMD} > ./svn.txt
-# RUN ${SVN_CMD} > ./svncmd.txt
-
-# RUN svn co svn+ssh://${MYUSER}@flash.rochester.edu/home/svn/repos/flashTest/trunk /home/${MYUSER}/flashTest
-
-# ENTRYPOINT ["/mnt/gnu-mpich/runTest.sh"]
 ENTRYPOINT ["/bin/bash"]
 
