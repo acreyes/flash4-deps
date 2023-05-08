@@ -63,9 +63,9 @@ RUN wget -q -O - https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.12/hdf5-1
 # #     INSTALL PNETCDF     #
 # #                         #
 # ###########################
-RUN wget -q -0 https://parallel-netcdf.github.io/Release/pnetcdf-1.12.3.tar.gz | tar -C /tmp -xzf - && \
+RUN wget -q -O - https://parallel-netcdf.github.io/Release/pnetcdf-1.12.3.tar.gz | tar -C /tmp -xzf - && \
     cd /tmp/pnetcdf-1.12.3 && \
-    ./configure --prefix=/usr/local \
+    ./configure --prefix=/usr/local && \
     make -j 4 && \
     make install && \
     rm -rf /tmp/pnetcdf-1.12.3

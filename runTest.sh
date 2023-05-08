@@ -21,6 +21,13 @@ ln -s ${FLASHTEST_DIR}/VMs/${VM}/exeScript ./exeScript
 ln -s ${FLASHTEST_DIR}/TestInfoFiles/testComp.gnu-mpich.info ${FLASHTEST_DIR}/test.info
 mkdir -p /home/${MYUSER}/FLASH4
 
+#rsync the output directory from the volume to local
+mkdir -p /home/${MYUSER}/flashTest/output/${VM}
+rsync -avp /outputdir/${VM}/ /home/${MYUSER}/flashTest/output/${VM}/
+
 # run flashTest!
 ${FLASHTEST_DIR}/flashTest.py -v -u -s ${VM} -f ${TESTFILE}
+
+#rsync output back to volume
+rsync -avp /home/${MYUSER}/flashTest/output/${VM}/ /outputdir/${VM}/
 
