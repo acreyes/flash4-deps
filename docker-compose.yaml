@@ -1,14 +1,26 @@
 services:
   gnu-mpich:
     image: testsuite/gnu-mpich
+    env_file: 
+      - gnu-mpich/.deps
     build:
       dockerfile: gnu-mpich/Dockerfile
+      args:
+        MPICH: 3.3.2
+        HDF5: 1.12.0
+        PNETCDF: 1.12.3
+        HYPRE: 2.19.0
+        # MPICH: ${MPICH}
+        # HDF5: ${HDF5}
+        # PNETCDF: ${PNETCDF}
+        # HYPRE: ${HYPRE}
     hostname: gnu-mpich
 
   gnu-mpich-tester:
     cpu_count: 4
     image: testsuite/gnu-mpich/tester
-    env_file: .env
+    env_file: 
+      - .env
     build:
       dockerfile: gnu-mpich/Dockerfile.tester
       args:

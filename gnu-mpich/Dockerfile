@@ -1,5 +1,11 @@
 FROM ubuntu:20.04
 
+ARG MPICH
+ARG HDF5
+ARG PNETCDF
+ARG HYPRE
+
+
 ##########################
 #                        #
 #     INSTALL TZDATA     #
@@ -38,12 +44,12 @@ RUN apt-get update && apt-get -y install \
 #     INSTALL MPICH     #
 #                       #
 #########################
-RUN wget -q -O - http://www.mpich.org/static/downloads/3.3.2/mpich-3.3.2.tar.gz | tar -C /tmp -xzf - && \
-    cd /tmp/mpich-3.3.2 && \
+RUN wget -q -O - http://www.mpich.org/static/downloads/${MPICH}/mpich-${MPICH}.tar.gz | tar -C /tmp -xzf - && \
+    cd /tmp/mpich-${MPICH} && \
     ./configure && \
     make -j 4 && \
     make install && \
-    rm -rf /tmp/mpich-3.3.2
+    rm -rf /tmp/mpich-${MPICH}
 
 
 # ########################
@@ -51,24 +57,24 @@ RUN wget -q -O - http://www.mpich.org/static/downloads/3.3.2/mpich-3.3.2.tar.gz 
 # #     INSTALL HDF5     #
 # #                      #
 # ########################
-RUN wget -q -O - https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.12/hdf5-1.12.0/src/hdf5-1.12.0.tar.gz | tar -C /tmp -xzf - && \
-    cd /tmp/hdf5-1.12.0 && \
+RUN wget -q -O - https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.12/hdf5-${HDF5}/src/hdf5-${HDF5}.tar.gz | tar -C /tmp -xzf - && \
+    cd /tmp/hdf5-${HDF5} && \
     ./configure --prefix=/usr/local --enable-parallel --enable-fortran && \
     make -j 4 && \
     make install && \
-    rm -rf /tmp/hdf5-1.12.0
+    rm -rf /tmp/hdf5-${HDF5}
 
 # ###########################
 # #                         #
 # #     INSTALL PNETCDF     #
 # #                         #
 # ###########################
-RUN wget -q -O - https://parallel-netcdf.github.io/Release/pnetcdf-1.12.3.tar.gz | tar -C /tmp -xzf - && \
-    cd /tmp/pnetcdf-1.12.3 && \
+RUN wget -q -O - https://parallel-netcdf.github.io/Release/pnetcdf-${PNETCDF}.tar.gz | tar -C /tmp -xzf - && \
+    cd /tmp/pnetcdf-${PNETCDF} && \
     ./configure --prefix=/usr/local && \
     make -j 4 && \
     make install && \
-    rm -rf /tmp/pnetcdf-1.12.3
+    rm -rf /tmp/pnetcdf-${PNETCDF}
 
 
 # # #########################
@@ -76,12 +82,12 @@ RUN wget -q -O - https://parallel-netcdf.github.io/Release/pnetcdf-1.12.3.tar.gz
 # # #     INSTALL HYPRE     #
 # # #                       #
 # # #########################
-RUN wget -q -O - https://github.com/hypre-space/hypre/archive/v2.19.0.tar.gz | tar -C /tmp -xzf - && \
-    cd /tmp/hypre-2.19.0/src && \
+RUN wget -q -O - https://github.com/hypre-space/hypre/archive/vHYPRE.tar.gz | tar -C /tmp -xzf - && \
+    cd /tmp/hypre-HYPRE/src && \
     ./configure --prefix=/usr/local && \
     make -j 4 && \
     make install && \
-    rm -rf /tmp/hypre-2.19.0
+    rm -rf /tmp/hypre-HYPRE
 
 ENTRYPOINT ["/bin/bash"]
 
