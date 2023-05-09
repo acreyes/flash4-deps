@@ -1,0 +1,8 @@
+# your username, used to authenticate svn repos on flash
+MYUSER=
+# need to point to the root of this git repo, where you would find the "runTest.sh" script
+FLASHDEPS_DIR=
+# directory where the output of flashTest will by rsynced
+OUTPUT_DIR=
+# location of your id_rsa key that will be used to authenticate on flash
+SSH_DIR=
