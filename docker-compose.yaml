@@ -1,8 +1,8 @@
 services:
   gnu-mpich:
     image: testsuite/gnu-mpich
-    env_file: 
-      - gnu-mpich/.deps
+    # env_file:
+    #   - ./gnu-mpich/.env.gnu-mpich
     build:
       dockerfile: gnu-mpich/Dockerfile
       args:
@@ -10,6 +10,9 @@ services:
         HDF5: 1.12.0
         PNETCDF: 1.12.3
         HYPRE: 2.19.0
+        # I would prefer to do this so I can parse the env files
+        # to generate float text in the flashTest-view but podman isn't happy
+        # with specifying an env_file that isn't .env, which seems to get loaded no matter what...
         # MPICH: ${MPICH}
         # HDF5: ${HDF5}
         # PNETCDF: ${PNETCDF}
@@ -19,12 +22,12 @@ services:
   gnu-mpich-tester:
     cpu_count: 4
     image: testsuite/gnu-mpich/tester
-    env_file: 
-      - .env
+    env_file: .env
+    depends_on: gnu-mpich
     build:
       dockerfile: gnu-mpich/Dockerfile.tester
       args:
-        MYUSER: ${USER}
+        MYUSER: ${MYUSER}
     hostname: gnu-mpich
     environment:
       - LOGNAME=gnu-mpich
@@ -32,7 +35,8 @@ services:
       - ${SSH_DIR}:/mnt/ssh:Z
       - ${FLASHDEPS_DIR}:/local:z
       - ${OUTPUT_DIR}:/outputdir:z
-    command: /local/runTest.sh ${USER} gnu-mpich TestFiles/lahey-mpi2/quickTests
+      - ${MAINARCHIVE_DIR}:/mainArchive:z
+    command: /local/runTest.sh ${MYUSER} gnu-mpich TestFiles/lahey-mpi2/quickTests
 
   gnu-mpich-attach:
     cpu_count: 4

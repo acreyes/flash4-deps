@@ -4,5 +4,7 @@ MYUSER=
 FLASHDEPS_DIR=
 # directory where the output of flashTest will by rsynced
 OUTPUT_DIR=
+# directory for the main archive
+MAINARCHIVE_DIR=
 # location of your id_rsa key that will be used to authenticate on flash
 SSH_DIR=
