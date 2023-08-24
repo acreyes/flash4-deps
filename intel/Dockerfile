@@ -50,8 +50,8 @@ RUN apt-get update --allow-unauthenticated && \
         intel-oneapi-mkl-devel \
         intel-oneapi-mpi-devel 
 
-SHELL ["/bin/bash", "-c"]
-RUN source /opt/intel/oneapi/setvars.sh
+# SHELL ["/bin/bash", "-c"]
+RUN . /opt/intel/oneapi/setvars.sh
 
 ENV CC=mpiicc
 ENV FC=mpiifort
@@ -63,7 +63,7 @@ ENV FC=mpiifort
 #     INSTALL HDF5     #
 #                      #
 ########################
-RUN source /opt/intel/oneapi/setvars.sh && \
+RUN . /opt/intel/oneapi/setvars.sh && \
     wget -q -O - https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.12/hdf5-${HDF5}/src/hdf5-${HDF5}.tar.gz | tar -C /tmp -xzf - && \
     cd /tmp/hdf5-${HDF5} && \
     ./configure --prefix=/usr/local --enable-parallel --enable-fortran && \
@@ -76,7 +76,7 @@ RUN source /opt/intel/oneapi/setvars.sh && \
 # #     INSTALL PNETCDF     #
 # #                         #
 # ###########################
-RUN source /opt/intel/oneapi/setvars.sh && \
+RUN . /opt/intel/oneapi/setvars.sh && \
     wget -q -O - https://parallel-netcdf.github.io/Release/pnetcdf-${PNETCDF}.tar.gz | tar -C /tmp -xzf - && \
     cd /tmp/pnetcdf-${PNETCDF} && \
     ./configure --prefix=/usr/local && \
@@ -90,7 +90,7 @@ RUN source /opt/intel/oneapi/setvars.sh && \
 # # #     INSTALL HYPRE     #
 # # #                       #
 # # #########################
-RUN source /opt/intel/oneapi/setvars.sh && \
+RUN . /opt/intel/oneapi/setvars.sh && \
     wget -q -O - https://github.com/hypre-space/hypre/archive/refs/tags/v${HYPRE}.tar.gz | tar -C /tmp -xzf - && \
     cd /tmp/hypre-${HYPRE}/src && \
     ./configure --prefix=/usr/local && \
