@@ -24,13 +24,15 @@ RUN apt-get update && \
 RUN apt-get update && apt-get -y install \
     bash \
     build-essential \
+    cmake \
     less \
     g++ \
     gcc \
     gfortran \
+    liblapack-dev \
     libz-dev \
     python2 \
-    python3 \
+    python3-pip \
     openssh-client \
     subversion \
     m4 \
@@ -38,6 +40,8 @@ RUN apt-get update && apt-get -y install \
     rm -rf /var/lib/apt/lists/* && \
     ln -s /usr/bin/python2 /usr/local/bin/python
 
+# PYBIND11
+RUN pip3 install pybind11
 
 #########################
 #                       #
@@ -82,12 +86,12 @@ RUN wget -q -O - https://parallel-netcdf.github.io/Release/pnetcdf-${PNETCDF}.ta
 # # #     INSTALL HYPRE     #
 # # #                       #
 # # #########################
-RUN wget -q -O - https://github.com/hypre-space/hypre/archive/vHYPRE.tar.gz | tar -C /tmp -xzf - && \
-    cd /tmp/hypre-HYPRE/src && \
+RUN wget -q -O - https://github.com/hypre-space/hypre/archive/v${HYPRE}.tar.gz | tar -C /tmp -xzf - && \
+    cd /tmp/hypre-${HYPRE}/src && \
     ./configure --prefix=/usr/local && \
     make -j 4 && \
     make install && \
-    rm -rf /tmp/hypre-HYPRE
+    rm -rf /tmp/hypre-${HYPRE}
 
 ENTRYPOINT ["/bin/bash"]
 

@@ -36,7 +36,7 @@ services:
       - ${FLASHDEPS_DIR}:/local:z
       - ${OUTPUT_DIR}:/outputdir:z
       - ${MAINARCHIVE_DIR}:/mainArchive:z
-    command: /local/runTest.sh ${MYUSER} gnu-mpich ${TESTFILE} ${BRANCH} ${VIEWARCH}
+    command: "/local/runTest.sh ${MYUSER} gnu-mpich ${TESTFILE} ${BRANCH} ${VIEWARCH}"
 
   gnu-mpich-attach:
     cpu_count: 4

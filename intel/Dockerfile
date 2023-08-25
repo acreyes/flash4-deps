@@ -23,16 +23,19 @@ RUN apt-get update && \
 RUN apt-get update && apt-get -y install \
     bash \
     build-essential \
+    cmake \
     less \
     libz-dev \
     python2 \
-    python3 \
+    python3-pip \
     openssh-client \
     subversion \
     m4 \
     wget && \
     rm -rf /var/lib/apt/lists/* && \
     ln -s /usr/bin/python2 /usr/local/bin/python
+
+RUN pip3 install pybind11
 
 # Install Intel
 # Following steps by https://software.intel.com/content/www/us/en/develop/documentation/installation-guide-for-intel-oneapi-toolkits-linux/top/installation/install-using-package-managers/apt.html .

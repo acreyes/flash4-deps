@@ -24,7 +24,7 @@ sed "s/tester/${MYUSER}/g" ${FLASHTEST_DIR}/VMs/${VM}/config > ${FLASHTEST_DIR}/
 sed -i "s/@branchname/${BRANCH}/g" ${FLASHTEST_DIR}/config
 sed -i "s/@view/${VIEWARCH}/g" ${FLASHTEST_DIR}/config
 
-ln -s ${FLASHTEST_DIR}/VMs/${VM}/exeScript ./exeScript
+ln -f ${FLASHTEST_DIR}/VMs/${VM}/exeScript ./exeScript
 # ln -s ${FLASHTEST_DIR}/TestInfoFiles/testComp.gnu-mpich.info ${FLASHTEST_DIR}/test.info
 sed "s/gnu-mpich/${VM}/g" ${FLASHTEST_DIR}/TestInfoFiles/testComp.gnu-mpich.info > ${FLASHTEST_DIR}/test.info
 head -1 ${FLASHTEST_DIR}/test.info
