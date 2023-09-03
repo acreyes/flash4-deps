@@ -26,7 +26,7 @@ sed -i "s/@view/${VIEWARCH}/g" ${FLASHTEST_DIR}/config
 
 ln -f ${FLASHTEST_DIR}/VMs/${VM}/exeScript ./exeScript
 # ln -s ${FLASHTEST_DIR}/TestInfoFiles/testComp.gnu-mpich.info ${FLASHTEST_DIR}/test.info
-sed "s/gnu-mpich/${VM}/g" ${FLASHTEST_DIR}/TestInfoFiles/testComp.gnu-mpich.info > ${FLASHTEST_DIR}/test.info
+sed "s/gnu-ompi/${VM}/g" ${FLASHTEST_DIR}/${TESTFILE} > ${FLASHTEST_DIR}/test.info
 head -1 ${FLASHTEST_DIR}/test.info
 
 mkdir -p /home/${MYUSER}/FLASH4
