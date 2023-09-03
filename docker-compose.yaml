@@ -77,7 +77,7 @@ services:
       - ${FLASHDEPS_DIR}:/local:z
       - ${OUTPUT_DIR}:/outputdir:z
       - ${MAINARCHIVE_DIR}:/mainArchive:z
-    command: /local/intel/entrypoint.sh ${MYUSER} intel ${TESTFILE} ${BRANCH} ${VIEWARCH}
+    command: "/local/intel/entrypoint.sh ${MYUSER} intel ${TESTFILE} ${BRANCH} ${VIEWARCH}"
 
   intel-attach:
     image: testsuite/intel/attach
