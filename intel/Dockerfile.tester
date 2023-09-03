@@ -1,0 +1,12 @@
+FROM testsuite/intel
+
+ARG MYUSER
+
+#I'm installing mpich just for it's mpirun, for whateve reason the podman container I build does NOT like intel's mpirun
+RUN apt-get update && apt-get -y install \
+    mpich \
+    rsync
+
+# volume /my/host/dir:/mnt:Z only like when we're root for w/e reason
+WORKDIR /home/${MYUSER}
+ENTRYPOINT ["/bin/bash"]
