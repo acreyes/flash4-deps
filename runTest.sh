@@ -36,7 +36,7 @@ mkdir -p /home/${MYUSER}/flashTest/output/${VM}
 rsync -ap /outputdir/${VM}/ /home/${MYUSER}/flashTest/output/${VM}/
 
 ## run flashTest!
-${FLASHTEST_DIR}/flashTest.py -v -u -s ${VM} -f ${TESTFILE}
+${FLASHTEST_DIR}/flashTest.py -v -u -s ${VM} -f ${FLASHTEST_DIR}/test.info
 # ${FLASHTEST_DIR}/flashTest.py -v -u -s ${VM} UnitTest/UG/UnkVarIndexFirst/3d
 
 ##rsync output back to volume
