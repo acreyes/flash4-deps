@@ -32,13 +32,16 @@ head -1 ${FLASHTEST_DIR}/test.info
 mkdir -p /home/${MYUSER}/FLASH4
 
 #rsync the output directory from the volume to local
-mkdir -p /home/${MYUSER}/flashTest/output/${VM}
-rsync -ap /outputdir/${VM}/ /home/${MYUSER}/flashTest/output/${VM}/
+# mkdir -p /home/${MYUSER}/flashTest/output/${VM}
+# mkdir -p /home/${MYUSER}/flashTest/localArchive/${VM}
+# rsync -ap /outputdir/${VM}/output/ /home/${MYUSER}/flashTest/output/${VM}/
+# rsync -ap /outputdir/${VM}/localArchive/ /home/${MYUSER}/flashTest/localArchive/${VM}/
 
 ## run flashTest!
 ${FLASHTEST_DIR}/flashTest.py -v -u -s ${VM} -f ${TESTFILE}
 # ${FLASHTEST_DIR}/flashTest.py -v -u -s ${VM} UnitTest/UG/UnkVarIndexFirst/3d
 
 ##rsync output back to volume
-rsync -ap --delete /home/${MYUSER}/flashTest/output/${VM}/ /outputdir/${VM}/
+# rsync -ap --delete /home/${MYUSER}/flashTest/output/${VM}/ /outputdir/${VM}/output/
+# rsync -ap --delete /home/${MYUSER}/flashTest/localArchive/${VM}/ /outputdir/${VM}/localArchive/
 
