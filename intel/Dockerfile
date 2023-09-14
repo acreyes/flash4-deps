@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 ARG HDF5=1.12.0
 ARG PNETCDF=1.12.3

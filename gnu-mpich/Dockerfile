@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 ARG MPICH
 ARG HDF5
@@ -26,9 +26,9 @@ RUN apt-get update && apt-get -y install \
     build-essential \
     cmake \
     less \
-    g++ \
-    gcc \
-    gfortran \
+    g++-12 \
+    gcc-12 \
+    gfortran-12 \
     liblapack-dev \
     libz-dev \
     python2 \
@@ -50,7 +50,7 @@ RUN pip3 install pybind11
 #########################
 RUN wget -q -O - http://www.mpich.org/static/downloads/${MPICH}/mpich-${MPICH}.tar.gz | tar -C /tmp -xzf - && \
     cd /tmp/mpich-${MPICH} && \
-    ./configure && \
+    FC=gfortran-12 CC=gcc-12 CXX=g++-12 ./configure && \
     make -j 4 && \
     make install && \
     rm -rf /tmp/mpich-${MPICH}
