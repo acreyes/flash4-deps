@@ -9,7 +9,7 @@ services:
         MPICH: 4.1.2
         HDF5: 1.12.0
         PNETCDF: 1.12.3
-        HYPRE: 2.19.0
+        HYPRE: 2.24.0
         # I would prefer to do this so I can parse the env files
         # to generate float text in the flashTest-view but podman isn't happy
         # with specifying an env_file that isn't .env, which seems to get loaded no matter what...
@@ -20,6 +20,8 @@ services:
     hostname: gnu-mpich
 
   gnu-mpich-tester:
+    stdin_open: true
+    tty: true
     cpu_count: 4
     image: testsuite/gnu-mpich/tester
     env_file: .env
@@ -36,7 +38,7 @@ services:
       - ${FLASHDEPS_DIR}:/local:z
       - ${OUTPUT_DIR}:/outputdir:z
       - ${MAINARCHIVE_DIR}:/mainArchive:z
-    command: "/local/runTest.sh ${MYUSER} gnu-mpich ${TESTFILE} ${BRANCH} ${VIEWARCH}"
+    command: "/local/runTest.sh ${MYUSER} ${VM} ${TESTFILE} ${BRANCH} ${VIEWARCH}"
 
   gnu-mpich-attach:
     cpu_count: 4
@@ -71,7 +73,7 @@ services:
       args:
         HDF5: 1.12.0
         PNETCDF: 1.12.3
-        HYPRE: 2.19.0
+        HYPRE: 2.30.0
     hostname: intel
 
   intel-tester:
