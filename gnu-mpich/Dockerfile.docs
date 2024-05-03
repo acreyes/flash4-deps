@@ -1,0 +1,14 @@
+FROM testsuite/gnu-mpich
+
+ARG MYUSER
+
+RUN apt-get update && apt-get -y install \
+    rsync
+
+RUN pip install sphinx sphinx-rtd-theme pydata-sphinx-theme sphinx-autodoc-typehints
+
+
+# volume /my/host/dir:/mnt:Z only like when we're root for w/e reason
+WORKDIR /home/${MYUSER}
+COPY ../autoDocs.sh /home/${MYUSER}
+ENTRYPOINT ["/bin/bash"]
