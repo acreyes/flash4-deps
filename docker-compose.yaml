@@ -40,16 +40,6 @@ services:
       - ${MAINARCHIVE_DIR}:/mainArchive:z
     command: "/local/runTest.sh ${MYUSER} ${VM} ${TESTFILE} ${BRANCH} ${VIEWARCH}"
 
-  gnu-mpich-attach:
-    cpu_count: 4
-    image: testsuite/gnu-mpich/attach
-    env_file: .env
-    build:
-      dockerfile: gnu-mpich/Dockerfile.tester
-      args:
-        MYUSER: ${USER}
-    hostname: gnu-mpich
-
   gnu-mpich-docs:
     image: testsuite/gnu-mpich/docs
     env_file: .env
@@ -95,11 +85,3 @@ services:
       - ${MAINARCHIVE_DIR}:/mainArchive:z
     command: "/local/intel/entrypoint.sh ${MYUSER} intel ${TESTFILE} ${BRANCH} ${VIEWARCH}"
 
-  intel-attach:
-    image: testsuite/intel/attach
-    env_file: .env
-    build:
-      dockerfile: intel/Dockerfile.tester
-      args:
-        MYUSER: ${USER}
-    hostname: intel
